@@ -35,7 +35,7 @@ extern "C" {
 
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
-#include "timer.h"
+#include "Timer.h"
 /*
 ** ===================================================================
 **     Event       :  Cpu_OnNMIINT (module Events)
@@ -92,7 +92,7 @@ void QuadInt_OnInterrupt(void)
 void TI1_OnInterrupt(void)
 {
   /* Write your code here ... */
-	TMR_OnInterrupt();
+  TMR_OnInterrupt();
 }
 
 /* END Events */
