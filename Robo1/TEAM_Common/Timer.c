@@ -22,6 +22,8 @@
 #include "TmDt1.h"
 
 #include "LED.h"
+#include "Keys.h"
+
 void TMR_OnInterrupt(void) {
   static unsigned int cntr = 0;
   /* this one gets called from an interrupt!!!! */
@@ -31,6 +33,7 @@ void TMR_OnInterrupt(void) {
 	  EVNT_SetEvent(EVNT_LED_HEARTBEAT);
 	  cntr = 0;
   }
+  //KEY_Scan();
 }
 
 void TMR_Init(void) {
