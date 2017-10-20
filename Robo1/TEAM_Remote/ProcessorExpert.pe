@@ -3,7 +3,7 @@
   <Header>
     <Name>TEAM_Remote</Name>
     <SavedBy>Erich Styger Local</SavedBy>
-    <ModificationStamp>116</ModificationStamp>
+    <ModificationStamp>118</ModificationStamp>
     <Date>2016-09-20</Date>
     <IDE>Eclipse IDE</IDE>
     <PEversion>1.12.2.RT7_b1550-0615</PEversion>
@@ -29,7 +29,7 @@
     <UseExistingModules>true</UseExistingModules>
     <RenamePeripheries>false</RenamePeripheries>
     <Autodependency>true</Autodependency>
-    <ProjectCompNumb>462</ProjectCompNumb>
+    <ProjectCompNumb>466</ProjectCompNumb>
     <DelUnusedPreviouslyGenFiles>true</DelUnusedPreviouslyGenFiles>
     <GeneratedCodeFrozen>false</GeneratedCodeFrozen>
     <AssignInitComponentNameToPrph>true</AssignInitComponentNameToPrph>
@@ -14519,7 +14519,7 @@
               <ItemSymbol>IntPeriodTmg</ItemSymbol>
               <ReadOnly>false</ReadOnly>
               <UserReadOnly>false</UserReadOnly>
-              <Value>init:1000 ms;prec:5%;RTS:none;clksrc_presc[SpeedMode0]Auto select;clksrc_presc[SpeedMode1]Auto select;clksrc_presc[SpeedMode2]Auto select;clksrc_presc[SpeedMode3]Auto select;clksrc_presc[SpeedMode4]Auto select;clksrc_presc[SpeedMode5]Auto select;clksrc_presc[SpeedMode6]Auto select;clksrc_presc[SpeedMode7]Auto select</Value>
+              <Value>init:10 ms;prec:5%;RTS:none;clksrc_presc[SpeedMode0]Auto select;clksrc_presc[SpeedMode1]Auto select;clksrc_presc[SpeedMode2]Auto select;clksrc_presc[SpeedMode3]Auto select;clksrc_presc[SpeedMode4]Auto select;clksrc_presc[SpeedMode5]Auto select;clksrc_presc[SpeedMode6]Auto select;clksrc_presc[SpeedMode7]Auto select</Value>
               <RuntimeSetting>0</RuntimeSetting>
               <ReqDevPrescHigh>-1</ReqDevPrescHigh>
               <ReqDevPrescLow>-1</ReqDevPrescLow>
@@ -15323,7 +15323,7 @@
         <ItemSymbol>Tmg_Period</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>init:1000 ms;prec:5%;RTS:none;clksrc_presc[SpeedMode0]Auto select;clksrc_presc[SpeedMode1]Auto select;clksrc_presc[SpeedMode2]Auto select;clksrc_presc[SpeedMode3]Auto select;clksrc_presc[SpeedMode4]Auto select;clksrc_presc[SpeedMode5]Auto select;clksrc_presc[SpeedMode6]Auto select;clksrc_presc[SpeedMode7]Auto select</Value>
+        <Value>init:10 ms;prec:5%;RTS:none;clksrc_presc[SpeedMode0]Auto select;clksrc_presc[SpeedMode1]Auto select;clksrc_presc[SpeedMode2]Auto select;clksrc_presc[SpeedMode3]Auto select;clksrc_presc[SpeedMode4]Auto select;clksrc_presc[SpeedMode5]Auto select;clksrc_presc[SpeedMode6]Auto select;clksrc_presc[SpeedMode7]Auto select</Value>
         <RuntimeSetting>0</RuntimeSetting>
         <ReqDevPrescHigh>-1</ReqDevPrescHigh>
         <ReqDevPrescLow>-1</ReqDevPrescLow>
@@ -16231,8 +16231,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-        <Value>false</Value>
-        <Expanded>false</Expanded>
+        <Value>true</Value>
+        <Expanded>true</Expanded>
       </ItemState>
       <ItemState>
         <ItemSymbol>Serial</ItemSymbol>
@@ -16829,7 +16829,7 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-        <Value>64</Value>
+        <Value>32</Value>
         <Base>DEC</Base>
       </ItemState>
       <ItemState>
@@ -16837,7 +16837,7 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-        <Value>64</Value>
+        <Value>32</Value>
         <Base>DEC</Base>
       </ItemState>
       <ItemState>
@@ -33870,15 +33870,15 @@
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
         <Value>true</Value>
-        <Expanded>false</Expanded>
+        <Expanded>true</Expanded>
       </ItemState>
       <ItemState>
         <ItemSymbol>PinOutput1</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-        <Index>2</Index>
-        <EnumSymbVal>noInit</EnumSymbVal>
+        <Index>0</Index>
+        <EnumSymbVal>disabled</EnumSymbVal>
       </ItemState>
       <ItemState>
         <ItemSymbol>PinInput1FeatureCondGroup</ItemSymbol>
@@ -34032,15 +34032,15 @@
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
         <Value>true</Value>
-        <Expanded>false</Expanded>
+        <Expanded>true</Expanded>
       </ItemState>
       <ItemState>
         <ItemSymbol>PinOutput2</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-        <Index>2</Index>
-        <EnumSymbVal>noInit</EnumSymbVal>
+        <Index>0</Index>
+        <EnumSymbVal>disabled</EnumSymbVal>
       </ItemState>
       <ItemState>
         <ItemSymbol>PinInput2FeatureCondGroup</ItemSymbol>
@@ -34356,7 +34356,7 @@
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
         <Value>true</Value>
-        <Expanded>false</Expanded>
+        <Expanded>true</Expanded>
       </ItemState>
       <ItemState>
         <ItemSymbol>PinOutput4</ItemSymbol>
@@ -40412,8 +40412,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-        <Index>2</Index>
-        <EnumSymbVal>noInit</EnumSymbVal>
+        <Index>0</Index>
+        <EnumSymbVal>disabled</EnumSymbVal>
       </ItemState>
       <ItemState>
         <ItemSymbol>PinInput0FeatureCondGroup</ItemSymbol>
@@ -40736,8 +40736,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-        <Index>2</Index>
-        <EnumSymbVal>noInit</EnumSymbVal>
+        <Index>0</Index>
+        <EnumSymbVal>disabled</EnumSymbVal>
       </ItemState>
       <ItemState>
         <ItemSymbol>PinInput2FeatureCondGroup</ItemSymbol>
@@ -47105,8 +47105,8 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
-        <Index>2</Index>
-        <EnumSymbVal>noInit</EnumSymbVal>
+        <Index>0</Index>
+        <EnumSymbVal>disabled</EnumSymbVal>
       </ItemState>
       <ItemState>
         <ItemSymbol>PinInput0FeatureCondGroup</ItemSymbol>

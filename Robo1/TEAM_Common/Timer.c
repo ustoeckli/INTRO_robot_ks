@@ -20,16 +20,23 @@
 #endif
 #include "TMOUT1.h"
 #include "TmDt1.h"
+#include "Keys.h"
 
 #include "LED.h"
 void TMR_OnInterrupt(void) {
-  static unsigned int cntr = 0;
+  static unsigned int cntr_heartbeat = 0;
+  static unsigned int cntr_keys = 0;
   /* this one gets called from an interrupt!!!! */
   /*! \todo Add code for a blinking LED here */
 
-  if (++cntr == (1000/TMR_TICK_MS)){
+  if (++cntr_heartbeat == (1000/TMR_TICK_MS)){
 	  EVNT_SetEvent(EVNT_LED_HEARTBEAT);
-	  cntr = 0;
+	  cntr_heartbeat = 0;
+  }
+
+  if (++cntr_keys == (10/TMR_TICK_MS)){
+	  KEY_Scan();
+	  cntr_keys = 0;
   }
 }
 
