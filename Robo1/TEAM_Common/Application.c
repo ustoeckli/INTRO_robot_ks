@@ -95,8 +95,7 @@ void APP_EventHandler(EVNT_Handle event) {
 #if PL_CONFIG_NOF_KEYS>=1
   case EVNT_SW1_PRESSED:
     BtnMsg(1, "pressed");
-    LED1_Neg();
-     break;
+    break;
 #endif
 #if PL_CONFIG_NOF_KEYS>=2
   case EVNT_SW2_PRESSED:
@@ -216,6 +215,7 @@ void APP_Start(void) {
   __asm volatile("cpsie i"); /* enable interrupts */
   for(;;) {
 	  EVNT_HandleEvent(APP_EventHandler, 1);
+	  KEY_Scan();
   }
 }
 

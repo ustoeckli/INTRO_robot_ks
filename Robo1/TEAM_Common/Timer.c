@@ -24,10 +24,10 @@
 
 #include "LED.h"
 #include "Keys.h"
+#include "Trigger.h"
 
 void TMR_OnInterrupt(void) {
   static unsigned int cntr_heartbeat = 0;
-  static unsigned int cntr_keys = 0;
   /* this one gets called from an interrupt!!!! */
   /*! \todo Add code for a blinking LED here */
 
@@ -35,12 +35,6 @@ void TMR_OnInterrupt(void) {
 	  EVNT_SetEvent(EVNT_LED_HEARTBEAT);
 	  cntr_heartbeat = 0;
   }
-
-  if (++cntr_keys == (10/TMR_TICK_MS)){
-	  KEY_Scan();
-	  cntr_keys = 0;
-  }
-  //KEY_Scan();
 }
 
 void TMR_Init(void) {
