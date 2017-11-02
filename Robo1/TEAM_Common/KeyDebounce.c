@@ -13,7 +13,9 @@
 #include "Debounce.h"
 #include "Trigger.h"
 #include "Event.h"
+#ifdef PL_LOCAL_CONFIG_HAS_RTOS
 #include "FRTOS1.h"
+#endif
 
 /*!
  * \brief Returns the state of the keys. This directly reflects the value of the port
@@ -226,6 +228,12 @@ void KEYDBNC_Process(void) {
    * And you will need to disable the keyboard interrupts too!
    */
   /*! \todo Only debounce if you are not debouncing already */
+   if(KEYDBNC_FSMdata.state == DBNC_KEY_IDLE && KEYDBNC_GetKeys() != 0){
+		#if PL_CONFIG_HAS_KBI
+			KEY_DisableInterrupts();
+		#endif
+	   DBNC_Process(&KEYDBNC_FSMdata);
+   }
  }
 
 void KEYDBNC_Init(void) {

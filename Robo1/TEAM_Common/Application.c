@@ -95,37 +95,85 @@ void APP_EventHandler(EVNT_Handle event) {
 #if PL_CONFIG_NOF_KEYS>=1
   case EVNT_SW1_PRESSED:
     BtnMsg(1, "pressed");
+	#if PL_CONFIG_HAS_BUZZER
+    	BUZ_PlayTune(BUZ_TUNE_BUTTON);
+	#endif
+    break;
+  case EVNT_SW1_RELEASED:
+        BtnMsg(1, "released");
+		#if PL_CONFIG_HAS_BUZZER
+        	BUZ_PlayTune(BUZ_TUNE_BUTTON_LONG);
+		#endif
+    break;
+  case EVNT_SW1_LPRESSED:
+        BtnMsg(1, "long pressed");
     break;
 #endif
 #if PL_CONFIG_NOF_KEYS>=2
   case EVNT_SW2_PRESSED:
       BtnMsg(2, "pressed");
    break;
+  case EVNT_SW2_RELEASED:
+	  BtnMsg(2, "released");
+  break;
+  case EVNT_SW2_LPRESSED:
+	  BtnMsg(2, "long pressed");
+  break;
 #endif
 #if PL_CONFIG_NOF_KEYS>=3
   case EVNT_SW3_PRESSED:
       BtnMsg(3, "pressed");
-   break;
+  break;
+  case EVNT_SW3_RELEASED:
+	  BtnMsg(3, "released");
+  break;
+  case EVNT_SW3_LPRESSED:
+	  BtnMsg(3, "long pressed");
+  break;
 #endif
 #if PL_CONFIG_NOF_KEYS>=4
   case EVNT_SW4_PRESSED:
       BtnMsg(4, "pressed");
-   break;
+  break;
+  case EVNT_SW4_RELEASED:
+	  BtnMsg(4, "released");
+  break;
+  case EVNT_SW4_LPRESSED:
+	  BtnMsg(4, "long pressed");
+  break;
 #endif
 #if PL_CONFIG_NOF_KEYS>=5
   case EVNT_SW5_PRESSED:
       BtnMsg(5, "pressed");
-   break;
+  break;
+  case EVNT_SW5_RELEASED:
+	  BtnMsg(5, "released");
+  break;
+  case EVNT_SW5_LPRESSED:
+	  BtnMsg(5, "long pressed");
+  break;
 #endif
 #if PL_CONFIG_NOF_KEYS>=6
   case EVNT_SW6_PRESSED:
       BtnMsg(6, "pressed");
-   break;
+  break;
+  case EVNT_SW6_RELEASED:
+	  BtnMsg(6, "released");
+  break;
+  case EVNT_SW6_LPRESSED:
+	  BtnMsg(6, "long pressed");
+  break;
 #endif
 #if PL_CONFIG_NOF_KEYS>=7
   case EVNT_SW7_PRESSED:
       BtnMsg(7, "pressed");
-   break;
+  break;
+  case EVNT_SW7_RELEASED:
+	  BtnMsg(7, "released");
+  break;
+  case EVNT_SW7_LPRESSED:
+	  BtnMsg(7, "long pressed");
+  break;
 #endif
     default:
       break;
@@ -213,9 +261,10 @@ void APP_Start(void) {
   PL_Init();
   APP_AdoptToHardware();
   __asm volatile("cpsie i"); /* enable interrupts */
+  //BUZ_PlayTune(BUZ_TUNE_WELCOME);
   for(;;) {
 	  EVNT_HandleEvent(APP_EventHandler, 1);
-	  KEY_Scan();
+	  KEYDBNC_Process();
   }
 }
 
