@@ -257,11 +257,28 @@ static void APP_AdoptToHardware(void) {
 #endif
 }
 
+static void BlinkyTask(void *pvParameters){
+	for(;;){
+		LED1_Neg();
+		vTaskDelay(pdMS_TO_TICKS(50));
+	}
+}
+
 void APP_Start(void) {
+  BaseType_t res;
+  xTaskHandle taskHndl;
+
   PL_Init();
   APP_AdoptToHardware();
   __asm volatile("cpsie i"); /* enable interrupts */
   //BUZ_PlayTune(BUZ_TUNE_WELCOME);
+
+  if (xTaskCreate(BlinkyTask, "Blinky", configMINIMAL_STACK_SIZE+50, (void*)NULL, 1, &taskHndl) != pdPASS){
+	  for(;;);
+  }
+
+  vTaskStartScheduler();
+
   for(;;) {
 	  EVNT_HandleEvent(APP_EventHandler, 1);
 	  KEYDBNC_Process();
