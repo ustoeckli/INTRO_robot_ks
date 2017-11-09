@@ -257,10 +257,17 @@ static void APP_AdoptToHardware(void) {
 #endif
 }
 
-static void BlinkyTask(void *pvParameters){
+static void BlinkyTask1(void *pvParameters){
 	for(;;){
 		LED1_Neg();
-		vTaskDelay(pdMS_TO_TICKS(50));
+		vTaskDelay(pdMS_TO_TICKS(100));
+	}
+}
+
+static void BlinkyTask2(void *pvParameters){
+	for(;;){
+		LED2_Neg();
+		vTaskDelay(pdMS_TO_TICKS(500));
 	}
 }
 
@@ -273,7 +280,10 @@ void APP_Start(void) {
   __asm volatile("cpsie i"); /* enable interrupts */
   //BUZ_PlayTune(BUZ_TUNE_WELCOME);
 
-  if (xTaskCreate(BlinkyTask, "Blinky", configMINIMAL_STACK_SIZE+50, (void*)NULL, 1, &taskHndl) != pdPASS){
+  if (xTaskCreate(BlinkyTask1, "Blinky", configMINIMAL_STACK_SIZE+50, (void*)NULL, 1, &taskHndl) != pdPASS){
+	  for(;;);
+  }
+  if (xTaskCreate(BlinkyTask2, "Blinky", configMINIMAL_STACK_SIZE+50, (void*)NULL, 1, &taskHndl) != pdPASS){
 	  for(;;);
   }
 
