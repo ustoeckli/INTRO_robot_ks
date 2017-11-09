@@ -68,7 +68,7 @@ static void BtnMsg(int btn, const char *msg) {
     UTIL1_strcat(buf, sizeof(buf), "\r\n");
     SHELL_SendString(buf);
   #else
-    CLS1_SendStr("Button pressed: ", CLS1_GetStdio()->stdOut);
+    CLS1_SendStr("Button ", CLS1_GetStdio()->stdOut);
     CLS1_SendStr(msg, CLS1_GetStdio()->stdOut);
     CLS1_SendStr(": ", CLS1_GetStdio()->stdOut);
     CLS1_SendNum32s(btn, CLS1_GetStdio()->stdOut);
@@ -257,9 +257,23 @@ static void APP_AdoptToHardware(void) {
 #endif
 }
 
+/*
+static void BlinkyTask(void *pvParameters) {
+	  TickType_t xLastWakeTime = xTaskGetTickCount();
+	  for(;;) {
+		  LEDPin1_NegVal();
+		  FRTOS1_vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(500));
+	  }
+}
+*/
+
 void APP_Start(void) {
   PL_Init();
   APP_AdoptToHardware();
+
+  //xTaskHandle taskHndl;
+  //FRTOS1_xTaskCreate(BlinkyTask, "Blinky", configMINIMAL_STACK_SIZE, (void*)NULL, tskIDLE_PRIORITY, &taskHndl);
+  //FRTOS1_vTaskStartScheduler();
   __asm volatile("cpsie i"); /* enable interrupts */
   //BUZ_PlayTune(BUZ_TUNE_WELCOME);
   for(;;) {
