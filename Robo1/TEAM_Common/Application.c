@@ -280,10 +280,10 @@ void APP_Start(void) {
   __asm volatile("cpsie i"); /* enable interrupts */
   //BUZ_PlayTune(BUZ_TUNE_WELCOME);
 
-  if (xTaskCreate(BlinkyTask1, "Blinky", configMINIMAL_STACK_SIZE+50, (void*)NULL, 1, &taskHndl) != pdPASS){
+  if (xTaskCreate(BlinkyTask1, "Blinky", 300, (void*)NULL, 1, &taskHndl) != pdPASS){
 	  for(;;);
   }
-  if (xTaskCreate(BlinkyTask2, "Blinky", configMINIMAL_STACK_SIZE+50, (void*)NULL, 1, &taskHndl) != pdPASS){
+  if (xTaskCreate(BlinkyTask2, "Blinky", 300, (void*)NULL, 1, &taskHndl) != pdPASS){
 	  for(;;);
   }
 
