@@ -83,6 +83,11 @@ void APP_EventHandler(EVNT_Handle event) {
   case EVNT_STARTUP:
     {
       int i;
+#if PL_CONFIG_HAS_BUZZER
+#ifndef PL_LOCAL_CONFIG_HAS_BUZ_WELCOME_DISABLED
+	  BUZ_PlayTune(BUZ_TUNE_WELCOME);
+#endif
+#endif
       for (i=0;i<5;i++) {
         LED1_Neg();
         WAIT1_Waitms(50);
@@ -257,37 +262,31 @@ static void APP_AdoptToHardware(void) {
 #endif
 }
 
-static void BlinkyTask1(void *pvParameters){
+/**
+ * Application Task: Handle KeyDebounce and Events
+ */
+static void AppTask(void *pvParameters){
 	for(;;){
-		LED1_Neg();
-		vTaskDelay(pdMS_TO_TICKS(100));
-	}
-}
-
-static void BlinkyTask2(void *pvParameters){
-	for(;;){
-		LED2_Neg();
-		vTaskDelay(pdMS_TO_TICKS(500));
+		KEYDBNC_Process();
+		EVNT_HandleEvent(APP_EventHandler, TRUE);
+		vTaskDelay(pdMS_TO_TICKS(10));
 	}
 }
 
 void APP_Start(void) {
-  BaseType_t res;
-  xTaskHandle taskHndl;
 
   PL_Init();
   APP_AdoptToHardware();
   __asm volatile("cpsie i"); /* enable interrupts */
-  //BUZ_PlayTune(BUZ_TUNE_WELCOME);
 
-  if (xTaskCreate(BlinkyTask1, "Blinky", 300, (void*)NULL, 1, &taskHndl) != pdPASS){
+  EVNT_SetEvent(EVNT_STARTUP); /* Startup anzeigen (über Event mit LED)*/
+
+  /* AppTask starten */
+  if (xTaskCreate(AppTask, "App", 300/sizeof(StackType_t), NULL, tskIDLE_PRIORITY, NULL) != pdPASS){
 	  for(;;);
   }
-  if (xTaskCreate(BlinkyTask2, "Blinky", 300, (void*)NULL, 1, &taskHndl) != pdPASS){
-	  for(;;);
-  }
 
-  vTaskStartScheduler();
+  vTaskStartScheduler(); /* Betriebssystem starten (-> Wird nicht mehr verlassen)*/
 
   for(;;) {
 	  EVNT_HandleEvent(APP_EventHandler, 1);

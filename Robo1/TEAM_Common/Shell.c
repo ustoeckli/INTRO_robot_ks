@@ -206,7 +206,7 @@ static const SHELL_IODesc ios[] =
 {
   {&SHELL_stdio, SHELL_DefaultShellBuffer, sizeof(SHELL_DefaultShellBuffer)},
 #if SHELL_CONFIG_HAS_SHELL_RTT
-  //{&RTT1_stdio, RTT1_DefaultShellBuffer, sizeof(RTT1_DefaultShellBuffer)},
+  {&RTT1_stdio, RTT1_DefaultShellBuffer, sizeof(RTT1_DefaultShellBuffer)},
 #endif
 #if RNET_CONFIG_REMOTE_STDIO
   {&RSTDIO_stdio, RSTDIO_DefaultShellBuffer, sizeof(RSTDIO_DefaultShellBuffer)},

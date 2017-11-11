@@ -36,6 +36,9 @@ void SQUEUE_SendString(const unsigned char *str) {
 
   bufSize = UTIL1_strlen(str)+1;
   ptr = pvPortMalloc(bufSize);
+  if (ptr == NULL){
+	  for(;;){} /* ups? */
+  }
   UTIL1_strcpy(ptr, bufSize, str);
   if (xQueueSendToBack(SQUEUE_Queue, &ptr, portMAX_DELAY)!=pdPASS) {
     for(;;){} /* ups? */
