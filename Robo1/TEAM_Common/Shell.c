@@ -362,7 +362,7 @@ void SHELL_ParseCmd(uint8_t *cmd) {
 #if PL_CONFIG_HAS_RTOS
 static void ShellTask(void *pvParameters) {
   int i;
-  /*! \todo Extend as needed */
+  unsigned char *msg;
 
   (void)pvParameters; /* not used */
   /* initialize buffers */
@@ -385,8 +385,14 @@ static void ShellTask(void *pvParameters) {
     }
 #elif PL_CONFIG_HAS_SHELL_QUEUE /* !PL_CONFIG_SQUEUE_SINGLE_CHAR */
     {
-      /*! \todo Handle shell queue */
-   }
+      /* Falls Elemente ins ShellQueue, diese über stdOut senden */
+      if (SQUEUE_NofElements() > 0){
+    	  msg = SQUEUE_ReceiveMessage();
+    	  if (msg != NULL){
+    		  CLS1_SendStr(msg, CLS1_GetStdio()->stdOut);
+    	  }
+      }
+    }
 #endif /* PL_CONFIG_HAS_SHELL_QUEUE */
     vTaskDelay(pdMS_TO_TICKS(10));
   } /* for */
