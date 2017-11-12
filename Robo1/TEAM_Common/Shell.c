@@ -362,7 +362,6 @@ void SHELL_ParseCmd(uint8_t *cmd) {
 #if PL_CONFIG_HAS_RTOS
 static void ShellTask(void *pvParameters) {
   int i;
-  unsigned char *msg;
 
   (void)pvParameters; /* not used */
   /* initialize buffers */
@@ -381,10 +380,19 @@ static void ShellTask(void *pvParameters) {
 #endif
 #if PL_CONFIG_HAS_SHELL_QUEUE && PL_CONFIG_SQUEUE_SINGLE_CHAR
     {
-        /*! \todo Handle shell queue */
+//      if (SQUEUE_NofElements() > 0){			/* Zeichen in Queue? */
+//    	  SHELL_SendChar(SQUEUE_ReceiveChar());	/* Zeichen aus Queue holen und senden */
+//      }
+        unsigned char ch;
+
+        while((ch=SQUEUE_ReceiveChar()) && ch!='\0') {
+          ios[0].stdio->stdOut(ch); /* output on first channel */
+        }
     }
 #elif PL_CONFIG_HAS_SHELL_QUEUE /* !PL_CONFIG_SQUEUE_SINGLE_CHAR */
     {
+      unsigned char *msg;
+
       /* Falls Elemente ins ShellQueue, diese über Shell senden */
       if (SQUEUE_NofElements() > 0){     /* Element in Queue? */
     	  msg = SQUEUE_ReceiveMessage(); /* Element aus Queue holen und entfernen */
