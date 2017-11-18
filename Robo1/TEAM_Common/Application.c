@@ -83,11 +83,11 @@ void APP_EventHandler(EVNT_Handle event) {
   case EVNT_STARTUP:
     {
       int i;
-#if PL_CONFIG_HAS_BUZZER
-#ifndef PL_LOCAL_CONFIG_HAS_BUZ_WELCOME_DISABLED
-	  BUZ_PlayTune(BUZ_TUNE_WELCOME);
-#endif
-#endif
+	  #if PL_CONFIG_HAS_BUZZER
+	  #ifndef PL_LOCAL_CONFIG_HAS_BUZ_WELCOME_DISABLED
+		  BUZ_PlayTune(BUZ_TUNE_WELCOME);
+	  #endif
+	  #endif
       for (i=0;i<5;i++) {
         LED1_Neg();
         WAIT1_Waitms(50);
@@ -106,12 +106,16 @@ void APP_EventHandler(EVNT_Handle event) {
     break;
   case EVNT_SW1_RELEASED:
         BtnMsg(1, "released");
-		#if PL_CONFIG_HAS_BUZZER
-        	BUZ_PlayTune(BUZ_TUNE_BUTTON_LONG);
-		#endif
     break;
   case EVNT_SW1_LPRESSED:
         BtnMsg(1, "long pressed");
+		#if PL_CONFIG_HAS_BUZZER
+			BUZ_PlayTune(BUZ_TUNE_BUTTON_LONG);
+			#ifdef PL_CONFIG_HAS_REFLECTANCE
+				/* IR-Sensor initial start/stop */
+			REF_CalibrateStartStop();
+			#endif
+		#endif
     break;
 #endif
 #if PL_CONFIG_NOF_KEYS>=2
@@ -279,10 +283,10 @@ void APP_Start(void) {
   APP_AdoptToHardware();
   __asm volatile("cpsie i"); /* enable interrupts */
 
-  EVNT_SetEvent(EVNT_STARTUP); /* Startup anzeigen (über Event mit LED)*/
+  EVNT_SetEvent(EVNT_STARTUP); /* Startup anzeigen (ï¿½ber Event mit LED)*/
 
   /* AppTask starten */
-  if (xTaskCreate(AppTask, "App", 300/sizeof(StackType_t), NULL, tskIDLE_PRIORITY, NULL) != pdPASS){
+  if (xTaskCreate(AppTask, "App", 500/sizeof(StackType_t), NULL, tskIDLE_PRIORITY, NULL) != pdPASS){
 	  for(;;);
   }
 

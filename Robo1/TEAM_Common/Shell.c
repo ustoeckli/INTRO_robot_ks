@@ -382,14 +382,19 @@ static void ShellTask(void *pvParameters) {
 #if PL_CONFIG_HAS_SHELL_QUEUE && PL_CONFIG_SQUEUE_SINGLE_CHAR
     {
         /*! \todo Handle shell queue */
+    	unsigned char character;
+    	if (SQUEUE_NofElements() > 0) {
+    		character = SQUEUE_ReceiveChar();
+    			CLS1_SendCh(character, CLS1_GetStdio()->stdOut);
+    	}
     }
 #elif PL_CONFIG_HAS_SHELL_QUEUE /* !PL_CONFIG_SQUEUE_SINGLE_CHAR */
     {
-      /* Falls Elemente ins ShellQueue, diese über Shell senden */
+      /* Falls Elemente ins ShellQueue, diese ï¿½ber Shell senden */
       if (SQUEUE_NofElements() > 0){     /* Element in Queue? */
     	  msg = SQUEUE_ReceiveMessage(); /* Element aus Queue holen und entfernen */
     	  if (msg != NULL){              /* Message vorhanden? */
-    		  CLS1_SendStr(msg, CLS1_GetStdio()->stdOut); /* über Shell senden */
+    		  CLS1_SendStr(msg, CLS1_GetStdio()->stdOut); /* ï¿½ber Shell senden */
     		  vPortFree(msg);            /* Speicher auf Heap wieder freigeben */
     	  }
       }

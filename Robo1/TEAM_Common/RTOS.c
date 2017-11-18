@@ -16,7 +16,10 @@
  */
 static void BlinkyTask(void *pvParameters){
 	for(;;){
-		LED1_Neg();
+		#ifdef PL_LOCAL_CONFIG_HAS_SEMAPHORE_DISABLED
+			LED1_Neg();
+		#endif
+
 		vTaskDelay(pdMS_TO_TICKS(100));
 	}
 }
