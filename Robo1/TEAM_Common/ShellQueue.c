@@ -14,7 +14,7 @@
 static xQueueHandle SQUEUE_Queue;
 
 #if PL_CONFIG_SQUEUE_SINGLE_CHAR
-  #define SQUEUE_LENGTH      48 /* items in queue, that's my buffer size */
+  #define SQUEUE_LENGTH      100 /* items in queue, that's my buffer size */
   #define SQUEUE_ITEM_SIZE   1  /* each item is a single character */
 #else
   #define SQUEUE_LENGTH      5 /* items in queue */
@@ -26,7 +26,7 @@ void SQUEUE_SendString(const unsigned char *str) {
 #if PL_CONFIG_SQUEUE_SINGLE_CHAR
   while(*str!='\0') {
     if (xQueueSendToBack(SQUEUE_Queue, str, 100/portTICK_PERIOD_MS)!=pdPASS) {
-      /*for(;;){}*/ /* ups? */ /* loosing character */
+      for(;;){} /* ups? */ /* loosing character */
     }
     str++;
   }
