@@ -385,7 +385,7 @@ static void ShellTask(void *pvParameters) {
     	unsigned char character;
     	if (SQUEUE_NofElements() > 0) {
     		character = SQUEUE_ReceiveChar();
-    			CLS1_SendCh(character, CLS1_GetStdio()->stdOut);
+			CLS1_SendCh(character, CLS1_GetStdio()->stdOut);
     	}
     }
 #elif PL_CONFIG_HAS_SHELL_QUEUE /* !PL_CONFIG_SQUEUE_SINGLE_CHAR */
